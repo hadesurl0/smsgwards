@@ -1,0 +1,1002 @@
+{
+  "model_type": "sms",
+  "version": "2.0.0",
+  "trained_at": "2026-11-13T07:37:27.967925+00:00",
+  "random_state": 42,
+  "languages_trained": [
+    "en",
+    "kk",
+    "ru"
+  ],
+  "dataset_sources": {
+    "sources": {
+      "uci_sms": {
+        "status": "loaded",
+        "rows": 5574,
+        "ham": 4827,
+        "spam": 747,
+        "languages": {
+          "en": 5574
+        }
+      },
+      "ruSpamModels": {
+        "status": "loaded",
+        "rows": 25000,
+        "ham": 15000,
+        "spam": 10000,
+        "languages": {
+          "ru": 24775,
+          "kk": 225
+        }
+      },
+      "telegram_spam_ru": {
+        "status": "skipped",
+        "rows": 0,
+        "ham": 0,
+        "spam": 0,
+        "languages": {},
+        "reason": "file missing or empty after filtering"
+      },
+      "kazspam_v1": {
+        "status": "loaded",
+        "rows": 474,
+        "ham": 0,
+        "spam": 474,
+        "languages": {
+          "kk": 474
+        }
+      },
+      "issai": {
+        "status": "skipped",
+        "rows": 0,
+        "ham": 0,
+        "spam": 0,
+        "languages": {},
+        "reason": "file missing or empty after filtering"
+      },
+      "kz_transformers": {
+        "status": "loaded",
+        "rows": 963,
+        "ham": 963,
+        "spam": 0,
+        "languages": {
+          "kk": 963
+        }
+      }
+    },
+    "skipped_sources": {
+      "telegram_spam_ru": "file missing or empty after filtering",
+      "issai": "file missing or empty after filtering"
+    },
+    "total_rows": 32011,
+    "total_ham": 20790,
+    "total_spam": 11221,
+    "kz_spam_count": 642,
+    "kz_ham_cap": 963,
+    "kz_ham_added": 963
+  },
+  "algorithm": "Logistic Regression (balanced)",
+  "algorithm_code": "LogisticRegression",
+  "hyperparameters": {
+    "clf__C": 5.0
+  },
+  "threshold": 0.29,
+  "feature_set": {
+    "word_tfidf": "ngram_range=(1, 2), min_df=2, max_df=0.95, sublinear_tf=True",
+    "char_tfidf": "analyzer='char_wb', ngram_range=(3, 5), min_df=2, max_df=0.95, sublinear_tf=True",
+    "manual_features": [
+      "char_length",
+      "caps_ratio",
+      "exclamation_count",
+      "has_url",
+      "has_money_or_phone",
+      "se_groups_count"
+    ],
+    "total_features_train": 164564
+  },
+  "dataset_summary": {
+    "initial_count": 32011,
+    "empty_removed": 2,
+    "duplicates_removed": 3273,
+    "duplicates_by_class": {
+      "1": 2947,
+      "0": 326
+    },
+    "final_count": 28736,
+    "raw_class_counts": {
+      "ham": 20790,
+      "spam": 11221
+    },
+    "dataset_sources": {
+      "sources": {
+        "uci_sms": {
+          "status": "loaded",
+          "rows": 5574,
+          "ham": 4827,
+          "spam": 747,
+          "languages": {
+            "en": 5574
+          }
+        },
+        "ruSpamModels": {
+          "status": "loaded",
+          "rows": 25000,
+          "ham": 15000,
+          "spam": 10000,
+          "languages": {
+            "ru": 24775,
+            "kk": 225
+          }
+        },
+        "telegram_spam_ru": {
+          "status": "skipped",
+          "rows": 0,
+          "ham": 0,
+          "spam": 0,
+          "languages": {},
+          "reason": "file missing or empty after filtering"
+        },
+        "kazspam_v1": {
+          "status": "loaded",
+          "rows": 474,
+          "ham": 0,
+          "spam": 474,
+          "languages": {
+            "kk": 474
+          }
+        },
+        "issai": {
+          "status": "skipped",
+          "rows": 0,
+          "ham": 0,
+          "spam": 0,
+          "languages": {},
+          "reason": "file missing or empty after filtering"
+        },
+        "kz_transformers": {
+          "status": "loaded",
+          "rows": 963,
+          "ham": 963,
+          "spam": 0,
+          "languages": {
+            "kk": 963
+          }
+        }
+      },
+      "skipped_sources": {
+        "telegram_spam_ru": "file missing or empty after filtering",
+        "issai": "file missing or empty after filtering"
+      },
+      "total_rows": 32011,
+      "total_ham": 20790,
+      "total_spam": 11221,
+      "kz_spam_count": 642,
+      "kz_ham_cap": 963,
+      "kz_ham_added": 963
+    },
+    "clean_class_counts": {
+      "ham": 20462,
+      "spam": 8274,
+      "ham_pct": 71.21,
+      "spam_pct": 28.79,
+      "imbalance_ratio": 2.47
+    },
+    "splits_summary": {
+      "train_indices": {
+        "total": 20115,
+        "ham": 14323,
+        "spam": 5792,
+        "spam_pct": 28.79
+      },
+      "val_indices": {
+        "total": 4310,
+        "ham": 3069,
+        "spam": 1241,
+        "spam_pct": 28.79
+      },
+      "test_indices": {
+        "total": 4311,
+        "ham": 3070,
+        "spam": 1241,
+        "spam_pct": 28.79
+      }
+    }
+  },
+  "baseline_val_report": {
+    "model_name": "Baseline LogisticRegression (class_weight='balanced', C=1.0)",
+    "artifact_path": "ml/artifacts/sms_baseline.joblib",
+    "train_time_sec": 6.684,
+    "n_features": 164564,
+    "val_metrics": {
+      "threshold": 0.5,
+      "accuracy": 0.9738,
+      "precision_spam": 0.9669,
+      "recall_spam": 0.9412,
+      "f1_spam": 0.9539,
+      "f2_spam": 0.9462,
+      "precision_macro": 0.9717,
+      "recall_macro": 0.9641,
+      "f1_macro": 0.9678,
+      "roc_auc": 0.9939,
+      "pr_auc": 0.9892,
+      "confusion_matrix": {
+        "tn": 3029,
+        "fp": 40,
+        "fn": 73,
+        "tp": 1168,
+        "matrix": [
+          [
+            3029,
+            40
+          ],
+          [
+            73,
+            1168
+          ]
+        ]
+      }
+    },
+    "error_analysis": {
+      "false_negatives": [
+        {
+          "id": 24847,
+          "true_label": 1,
+          "pred_label": 0,
+          "probability": 0.0046,
+          "text_raw": "Да как блин они это делают",
+          "text_clean": "да как блин они это делают",
+          "comment": "Отсутствуют явные маркеры <url>, <phone>, <money>; разговорная лексика маскирует спам под бытовое сообщение."
+        },
+        {
+          "id": 29871,
+          "true_label": 1,
+          "pred_label": 0,
+          "probability": 0.0339,
+          "text_raw": "В анtалии нет снεга но мы приbeзли eго из бoливии sugarantalia there is no snow in antalya but we brought it from bolivia sugarantalia",
+          "text_clean": "в анталии нет снега но мы привезли его из боливии sugarantalia there is no snow in antalya but we brought it from bolivia sugarantalia",
+          "comment": "Отсутствуют явные маркеры <url>, <phone>, <money>; разговорная лексика маскирует спам под бытовое сообщение."
+        },
+        {
+          "id": 22513,
+          "true_label": 1,
+          "pred_label": 0,
+          "probability": 0.0385,
+          "text_raw": "Возьми меня полностью а я не буду сопротивляться",
+          "text_clean": "возьми меня полностью а я не буду сопротивляться",
+          "comment": "Отсутствуют явные маркеры <url>, <phone>, <money>; разговорная лексика маскирует спам под бытовое сообщение."
+        },
+        {
+          "id": 1876,
+          "true_label": 1,
+          "pred_label": 0,
+          "probability": 0.048,
+          "text_raw": "Would you like to see my XXX pics they are so hot they were nearly banned in the uk!",
+          "text_clean": "would you like to see my xxx pics they are so hot they were nearly banned in the uk!",
+          "comment": "Отсутствуют явные маркеры <url>, <phone>, <money>; разговорная лексика маскирует спам под бытовое сообщение."
+        },
+        {
+          "id": 28205,
+          "true_label": 1,
+          "pred_label": 0,
+          "probability": 0.0583,
+          "text_raw": "Забудь про пοисκ рабοты вοт она",
+          "text_clean": "забудь про поиск работы вот она",
+          "comment": "Отсутствуют явные маркеры <url>, <phone>, <money>; разговорная лексика маскирует спам под бытовое сообщение."
+        }
+      ],
+      "false_positives": [
+        {
+          "id": 15400,
+          "true_label": 0,
+          "pred_label": 1,
+          "probability": 0.9915,
+          "text_raw": "Требуется уборщица посудомойщица ресторан ст м мичуринский проспект график работы 3 1 смена по 12 14 часов почасовая ставка 170р час выход 2040 2380р чаевые когда смена на мойке опыт работы желателен бесплатное питание гражданство рф или полный пакет документов выплаты два раза в месяц без задержек официальное оформление оплачиваемый отпуск и больничный елена 79057503917 подробности по телефону",
+          "text_clean": "требуется уборщица посудомойщица ресторан ст м мичуринский проспект график работы <num> <num> смена по <num> <num> часов почасовая ставка <num> р час выход <num> <num> р чаевые когда смена на мойке опыт работы желателен бесплатное питание гражданство рф или полный пакет документов выплаты два раза в месяц без задержек официальное оформление оплачиваемый отпуск и больничный елена <phone> подробности по телефону",
+          "comment": "Наличие маркеров (<num>, <phone>) и слов действия в легитимном сообщении повышает оценку риска при class_weight='balanced'."
+        },
+        {
+          "id": 19435,
+          "true_label": 0,
+          "pred_label": 1,
+          "probability": 0.9592,
+          "text_raw": "Срочно требуется дворник метро первомайское график 5 2 начало работы с 6 утра тел 7 969 282 10 84 ирина официальная регистрация и патент",
+          "text_clean": "срочно требуется дворник метро первомайское график <num> <num> начало работы с <num> утра тел <phone> ирина официальная регистрация и патент",
+          "comment": "Наличие маркеров (<num>, <phone>) и слов действия в легитимном сообщении повышает оценку риска при class_weight='balanced'."
+        },
+        {
+          "id": 9409,
+          "true_label": 0,
+          "pred_label": 1,
+          "probability": 0.9524,
+          "text_raw": "Земельный участок в п. Юг. 18 соток с недостроенным домом 8х7 м. из пеноблока 1 этаж , фундамент 12х7 м. Баня, конюшня, фермерское хозяйство в подарок козы, куры . Эл во, есть возможность провести воду, газ. Цена 1320 т.р. Тел 89223344686",
+          "text_clean": "земельный участок в п юг <num> соток с недостроенным домом <num> х <num> м из пеноблока <num> этаж фундамент <num> х <num> м баня конюшня фермерское хозяйство в подарок козы куры эл во есть возможность провести воду газ цена <num> т р тел <phone>",
+          "comment": "Наличие маркеров (<num>, <phone>) и слов действия в легитимном сообщении повышает оценку риска при class_weight='balanced'."
+        },
+        {
+          "id": 17411,
+          "true_label": 0,
+          "pred_label": 1,
+          "probability": 0.9354,
+          "text_raw": "Работа есть работа",
+          "text_clean": "работа есть работа",
+          "comment": "Пересечение лексики (слова free, call, text, claim или капслок) со словарём спам-класса."
+        },
+        {
+          "id": 9765,
+          "true_label": 0,
+          "pred_label": 1,
+          "probability": 0.9156,
+          "text_raw": "Отдам бесплатно одежду для мальчика 80 86 р , ботинки lc Waikiki 24 р Бронь Мотоцикл толокар, от 2 х лет 10",
+          "text_clean": "отдам бесплатно одежду для мальчика <num> <num> р ботинки lc waikiki <num> р бронь мотоцикл толокар от <num> х лет <num>",
+          "comment": "Наличие маркеров (<num>) и слов действия в легитимном сообщении повышает оценку риска при class_weight='balanced'."
+        }
+      ]
+    },
+    "reload_verified": true
+  },
+  "feature_variants_comparison_val": [
+    {
+      "variant_code": "words_only_no_stopwords",
+      "description": "Только слова TF-IDF (1,2), без удаления стоп-слов",
+      "n_features": 42732,
+      "train_time_sec": 1.509,
+      "threshold": 0.5,
+      "accuracy": 0.9647,
+      "precision_spam": 0.943,
+      "recall_spam": 0.9339,
+      "f1_spam": 0.9385,
+      "f2_spam": 0.9357,
+      "precision_macro": 0.9582,
+      "recall_macro": 0.9556,
+      "f1_macro": 0.9569,
+      "roc_auc": 0.9889,
+      "pr_auc": 0.9763,
+      "confusion_matrix": {
+        "tn": 2999,
+        "fp": 70,
+        "fn": 82,
+        "tp": 1159,
+        "matrix": [
+          [
+            2999,
+            70
+          ],
+          [
+            82,
+            1159
+          ]
+        ]
+      }
+    },
+    {
+      "variant_code": "words_only_with_stopwords",
+      "description": "Только слова TF-IDF (1,2), с удалением стоп-слов",
+      "n_features": 31978,
+      "train_time_sec": 0.921,
+      "threshold": 0.5,
+      "accuracy": 0.9575,
+      "precision_spam": 0.9386,
+      "recall_spam": 0.9122,
+      "f1_spam": 0.9252,
+      "f2_spam": 0.9173,
+      "precision_macro": 0.9518,
+      "recall_macro": 0.944,
+      "f1_macro": 0.9478,
+      "roc_auc": 0.9891,
+      "pr_auc": 0.97,
+      "confusion_matrix": {
+        "tn": 2995,
+        "fp": 74,
+        "fn": 109,
+        "tp": 1132,
+        "matrix": [
+          [
+            2995,
+            74
+          ],
+          [
+            109,
+            1132
+          ]
+        ]
+      }
+    },
+    {
+      "variant_code": "words_plus_char_manual_no_stopwords",
+      "description": "Слова (1,2) + символьные char_wb (3,5) + 6 ручных признаков (без удаления стоп-слов)",
+      "n_features": 164564,
+      "train_time_sec": 6.224,
+      "threshold": 0.5,
+      "accuracy": 0.9738,
+      "precision_spam": 0.9669,
+      "recall_spam": 0.9412,
+      "f1_spam": 0.9539,
+      "f2_spam": 0.9462,
+      "precision_macro": 0.9717,
+      "recall_macro": 0.9641,
+      "f1_macro": 0.9678,
+      "roc_auc": 0.9939,
+      "pr_auc": 0.9892,
+      "confusion_matrix": {
+        "tn": 3029,
+        "fp": 40,
+        "fn": 73,
+        "tp": 1168,
+        "matrix": [
+          [
+            3029,
+            40
+          ],
+          [
+            73,
+            1168
+          ]
+        ]
+      }
+    },
+    {
+      "variant_code": "words_plus_char_manual_with_stopwords",
+      "description": "Слова (1,2) + символьные char_wb (3,5) + 6 ручных признаков (со стоп-словами)",
+      "n_features": 153350,
+      "train_time_sec": 5.56,
+      "threshold": 0.5,
+      "accuracy": 0.9705,
+      "precision_spam": 0.9619,
+      "recall_spam": 0.9347,
+      "f1_spam": 0.9481,
+      "f2_spam": 0.94,
+      "precision_macro": 0.9679,
+      "recall_macro": 0.9599,
+      "f1_macro": 0.9638,
+      "roc_auc": 0.9935,
+      "pr_auc": 0.9863,
+      "confusion_matrix": {
+        "tn": 3023,
+        "fp": 46,
+        "fn": 81,
+        "tp": 1160,
+        "matrix": [
+          [
+            3023,
+            46
+          ],
+          [
+            81,
+            1160
+          ]
+        ]
+      }
+    }
+  ],
+  "models_comparison_val": [
+    {
+      "model_code": "MultinomialNB",
+      "model_name": "Multinomial Naive Bayes",
+      "best_params": {
+        "clf__alpha": 0.01
+      },
+      "cv_best_f2": 0.9412,
+      "grid_search_time_sec": 21.966,
+      "train_time_sec": 4.702,
+      "single_sms_latency_ms": 2.604,
+      "threshold": 0.5,
+      "accuracy": 0.9722,
+      "precision_spam": 0.9636,
+      "recall_spam": 0.9388,
+      "f1_spam": 0.951,
+      "f2_spam": 0.9436,
+      "precision_macro": 0.9695,
+      "recall_macro": 0.9622,
+      "f1_macro": 0.9658,
+      "roc_auc": 0.9901,
+      "pr_auc": 0.9847,
+      "confusion_matrix": {
+        "tn": 3025,
+        "fp": 44,
+        "fn": 76,
+        "tp": 1165,
+        "matrix": [
+          [
+            3025,
+            44
+          ],
+          [
+            76,
+            1165
+          ]
+        ]
+      }
+    },
+    {
+      "model_code": "LogisticRegression",
+      "model_name": "Logistic Regression (balanced)",
+      "best_params": {
+        "clf__C": 5.0
+      },
+      "cv_best_f2": 0.9521,
+      "grid_search_time_sec": 29.441,
+      "train_time_sec": 6.806,
+      "single_sms_latency_ms": 1.713,
+      "threshold": 0.5,
+      "accuracy": 0.9763,
+      "precision_spam": 0.9734,
+      "recall_spam": 0.9436,
+      "f1_spam": 0.9583,
+      "f2_spam": 0.9494,
+      "precision_macro": 0.9754,
+      "recall_macro": 0.9666,
+      "f1_macro": 0.9709,
+      "roc_auc": 0.9953,
+      "pr_auc": 0.9924,
+      "confusion_matrix": {
+        "tn": 3037,
+        "fp": 32,
+        "fn": 70,
+        "tp": 1171,
+        "matrix": [
+          [
+            3037,
+            32
+          ],
+          [
+            70,
+            1171
+          ]
+        ]
+      }
+    },
+    {
+      "model_code": "LinearSVC_Calibrated",
+      "model_name": "Linear SVM + CalibratedClassifierCV",
+      "best_params": {
+        "clf__estimator__C": 1.0
+      },
+      "cv_best_f2": 0.9558,
+      "grid_search_time_sec": 20.705,
+      "train_time_sec": 5.419,
+      "single_sms_latency_ms": 3.304,
+      "threshold": 0.5,
+      "accuracy": 0.9796,
+      "precision_spam": 0.9768,
+      "recall_spam": 0.9517,
+      "f1_spam": 0.9641,
+      "f2_spam": 0.9566,
+      "precision_macro": 0.9787,
+      "recall_macro": 0.9713,
+      "f1_macro": 0.9749,
+      "roc_auc": 0.9948,
+      "pr_auc": 0.992,
+      "confusion_matrix": {
+        "tn": 3041,
+        "fp": 28,
+        "fn": 60,
+        "tp": 1181,
+        "matrix": [
+          [
+            3041,
+            28
+          ],
+          [
+            60,
+            1181
+          ]
+        ]
+      }
+    },
+    {
+      "model_code": "RandomForest",
+      "model_name": "Random Forest (balanced)",
+      "best_params": {
+        "clf__max_depth": 30,
+        "clf__n_estimators": 100
+      },
+      "cv_best_f2": 0.8976,
+      "grid_search_time_sec": 25.536,
+      "train_time_sec": 5.873,
+      "single_sms_latency_ms": 90.881,
+      "threshold": 0.5,
+      "accuracy": 0.9529,
+      "precision_spam": 0.9577,
+      "recall_spam": 0.8751,
+      "f1_spam": 0.9145,
+      "f2_spam": 0.8905,
+      "precision_macro": 0.9544,
+      "recall_macro": 0.9297,
+      "f1_macro": 0.941,
+      "roc_auc": 0.9812,
+      "pr_auc": 0.9693,
+      "confusion_matrix": {
+        "tn": 3021,
+        "fp": 48,
+        "fn": 155,
+        "tp": 1086,
+        "matrix": [
+          [
+            3021,
+            48
+          ],
+          [
+            155,
+            1086
+          ]
+        ]
+      }
+    }
+  ],
+  "val_metrics": {
+    "threshold": 0.29,
+    "accuracy": 0.9766,
+    "precision_spam": 0.946,
+    "recall_spam": 0.9742,
+    "f1_spam": 0.9599,
+    "f2_spam": 0.9684,
+    "precision_macro": 0.9677,
+    "recall_macro": 0.9759,
+    "f1_macro": 0.9717,
+    "roc_auc": 0.9953,
+    "pr_auc": 0.9924,
+    "confusion_matrix": {
+      "tn": 3000,
+      "fp": 69,
+      "fn": 32,
+      "tp": 1209,
+      "matrix": [
+        [
+          3000,
+          69
+        ],
+        [
+          32,
+          1209
+        ]
+      ]
+    }
+  },
+  "test_metrics": {
+    "threshold": 0.29,
+    "accuracy": 0.9724,
+    "precision_spam": 0.9309,
+    "recall_spam": 0.9766,
+    "f1_spam": 0.9532,
+    "f2_spam": 0.9671,
+    "precision_macro": 0.9606,
+    "recall_macro": 0.9737,
+    "f1_macro": 0.9668,
+    "roc_auc": 0.9961,
+    "pr_auc": 0.9925,
+    "confusion_matrix": {
+      "tn": 2980,
+      "fp": 90,
+      "fn": 29,
+      "tp": 1212,
+      "matrix": [
+        [
+          2980,
+          90
+        ],
+        [
+          29,
+          1212
+        ]
+      ]
+    }
+  },
+  "selection_rationale": "Модель LogisticRegression (class_weight='balanced') с символьными и словарными TF-IDF N-граммами и 6 ручными признаками показала лучший баланс полноты (Recall) и точности (Precision), наивысший PR-AUC/ROC-AUC, высокую скорость предсказания (< 1.5 мс на одно сообщение) и полную интерпретируемость весов признаков.",
+  "top_15_tfidf_features": {
+    "ham": [
+      {
+        "feature": "word_tfidf__не",
+        "mean_tfidf": 0.022111
+      },
+      {
+        "feature": "word_tfidf__num",
+        "mean_tfidf": 0.018692
+      },
+      {
+        "feature": "word_tfidf__на",
+        "mean_tfidf": 0.016063
+      },
+      {
+        "feature": "word_tfidf__что",
+        "mean_tfidf": 0.014178
+      },
+      {
+        "feature": "word_tfidf__это",
+        "mean_tfidf": 0.013186
+      },
+      {
+        "feature": "word_tfidf__как",
+        "mean_tfidf": 0.01198
+      },
+      {
+        "feature": "char_tfidf__то ",
+        "mean_tfidf": 0.011558
+      },
+      {
+        "feature": "char_tfidf__ по",
+        "mean_tfidf": 0.010108
+      },
+      {
+        "feature": "char_tfidf__ не",
+        "mean_tfidf": 0.009978
+      },
+      {
+        "feature": "word_tfidf__you",
+        "mean_tfidf": 0.009677
+      },
+      {
+        "feature": "char_tfidf__ть ",
+        "mean_tfidf": 0.009487
+      },
+      {
+        "feature": "char_tfidf__не ",
+        "mean_tfidf": 0.009168
+      },
+      {
+        "feature": "word_tfidf__так",
+        "mean_tfidf": 0.008783
+      },
+      {
+        "feature": "char_tfidf__ пр",
+        "mean_tfidf": 0.0086
+      },
+      {
+        "feature": "char_tfidf__ на",
+        "mean_tfidf": 0.008571
+      }
+    ],
+    "spam": [
+      {
+        "feature": "word_tfidf__num",
+        "mean_tfidf": 0.067461
+      },
+      {
+        "feature": "char_tfidf__m> ",
+        "mean_tfidf": 0.029706
+      },
+      {
+        "feature": "char_tfidf__num> ",
+        "mean_tfidf": 0.029706
+      },
+      {
+        "feature": "char_tfidf__um> ",
+        "mean_tfidf": 0.029706
+      },
+      {
+        "feature": "char_tfidf__ <n",
+        "mean_tfidf": 0.029694
+      },
+      {
+        "feature": "char_tfidf__ <nu",
+        "mean_tfidf": 0.029694
+      },
+      {
+        "feature": "char_tfidf__ <num",
+        "mean_tfidf": 0.029694
+      },
+      {
+        "feature": "char_tfidf__<nu",
+        "mean_tfidf": 0.029694
+      },
+      {
+        "feature": "char_tfidf__<num",
+        "mean_tfidf": 0.029694
+      },
+      {
+        "feature": "char_tfidf__<num>",
+        "mean_tfidf": 0.029694
+      },
+      {
+        "feature": "char_tfidf__num>",
+        "mean_tfidf": 0.029694
+      },
+      {
+        "feature": "char_tfidf__um>",
+        "mean_tfidf": 0.029694
+      },
+      {
+        "feature": "char_tfidf__num",
+        "mean_tfidf": 0.029644
+      },
+      {
+        "feature": "word_tfidf__от",
+        "mean_tfidf": 0.027688
+      },
+      {
+        "feature": "word_tfidf__от num",
+        "mean_tfidf": 0.025284
+      }
+    ]
+  },
+  "multilingual_evaluation": {
+    "ru": {
+      "count": 120,
+      "spam_count": 60,
+      "ham_count": 60,
+      "pure_ml_model": {
+        "threshold": 0.29,
+        "accuracy": 0.7833,
+        "precision_spam": 0.75,
+        "recall_spam": 0.85,
+        "f1_spam": 0.7969,
+        "f2_spam": 0.8279,
+        "precision_macro": 0.7885,
+        "recall_macro": 0.7833,
+        "f1_macro": 0.7824,
+        "roc_auc": 0.9061,
+        "pr_auc": 0.9252,
+        "confusion_matrix": {
+          "tn": 43,
+          "fp": 17,
+          "fn": 9,
+          "tp": 51,
+          "matrix": [
+            [
+              43,
+              17
+            ],
+            [
+              9,
+              51
+            ]
+          ]
+        }
+      },
+      "hybrid_ml_plus_rules": {
+        "threshold": 0.5,
+        "accuracy": 0.875,
+        "precision_spam": 0.8462,
+        "recall_spam": 0.9167,
+        "f1_spam": 0.88,
+        "f2_spam": 0.9016,
+        "precision_macro": 0.8776,
+        "recall_macro": 0.875,
+        "f1_macro": 0.8748,
+        "roc_auc": 0.9769,
+        "pr_auc": 0.9785,
+        "confusion_matrix": {
+          "tn": 50,
+          "fp": 10,
+          "fn": 5,
+          "tp": 55,
+          "matrix": [
+            [
+              50,
+              10
+            ],
+            [
+              5,
+              55
+            ]
+          ]
+        }
+      }
+    },
+    "kk": {
+      "count": 60,
+      "spam_count": 30,
+      "ham_count": 30,
+      "pure_ml_model": {
+        "threshold": 0.29,
+        "accuracy": 0.8667,
+        "precision_spam": 0.8929,
+        "recall_spam": 0.8333,
+        "f1_spam": 0.8621,
+        "f2_spam": 0.8446,
+        "precision_macro": 0.8683,
+        "recall_macro": 0.8667,
+        "f1_macro": 0.8665,
+        "roc_auc": 0.9533,
+        "pr_auc": 0.9497,
+        "confusion_matrix": {
+          "tn": 27,
+          "fp": 3,
+          "fn": 5,
+          "tp": 25,
+          "matrix": [
+            [
+              27,
+              3
+            ],
+            [
+              5,
+              25
+            ]
+          ]
+        }
+      },
+      "hybrid_ml_plus_rules": {
+        "threshold": 0.5,
+        "accuracy": 0.95,
+        "precision_spam": 0.9355,
+        "recall_spam": 0.9667,
+        "f1_spam": 0.9508,
+        "f2_spam": 0.9603,
+        "precision_macro": 0.9505,
+        "recall_macro": 0.95,
+        "f1_macro": 0.95,
+        "roc_auc": 0.9911,
+        "pr_auc": 0.9912,
+        "confusion_matrix": {
+          "tn": 28,
+          "fp": 2,
+          "fn": 1,
+          "tp": 29,
+          "matrix": [
+            [
+              28,
+              2
+            ],
+            [
+              1,
+              29
+            ]
+          ]
+        }
+      }
+    },
+    "all_ru_kk": {
+      "count": 180,
+      "spam_count": 90,
+      "ham_count": 90,
+      "pure_ml_model": {
+        "threshold": 0.29,
+        "accuracy": 0.8111,
+        "precision_spam": 0.7917,
+        "recall_spam": 0.8444,
+        "f1_spam": 0.8172,
+        "f2_spam": 0.8333,
+        "precision_macro": 0.8125,
+        "recall_macro": 0.8111,
+        "f1_macro": 0.8109,
+        "roc_auc": 0.9156,
+        "pr_auc": 0.9269,
+        "confusion_matrix": {
+          "tn": 70,
+          "fp": 20,
+          "fn": 14,
+          "tp": 76,
+          "matrix": [
+            [
+              70,
+              20
+            ],
+            [
+              14,
+              76
+            ]
+          ]
+        }
+      },
+      "hybrid_ml_plus_rules": {
+        "threshold": 0.5,
+        "accuracy": 0.9,
+        "precision_spam": 0.875,
+        "recall_spam": 0.9333,
+        "f1_spam": 0.9032,
+        "f2_spam": 0.9211,
+        "precision_macro": 0.9018,
+        "recall_macro": 0.9,
+        "f1_macro": 0.8999,
+        "roc_auc": 0.9823,
+        "pr_auc": 0.9831,
+        "confusion_matrix": {
+          "tn": 78,
+          "fp": 12,
+          "fn": 6,
+          "tp": 84,
+          "matrix": [
+            [
+              78,
+              12
+            ],
+            [
+              6,
+              84
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

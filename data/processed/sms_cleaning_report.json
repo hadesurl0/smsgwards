@@ -1,0 +1,108 @@
+{
+  "initial_count": 32011,
+  "empty_removed": 2,
+  "duplicates_removed": 3273,
+  "duplicates_by_class": {
+    "1": 2947,
+    "0": 326
+  },
+  "final_count": 28736,
+  "raw_class_counts": {
+    "ham": 20790,
+    "spam": 11221
+  },
+  "dataset_sources": {
+    "sources": {
+      "uci_sms": {
+        "status": "loaded",
+        "rows": 5574,
+        "ham": 4827,
+        "spam": 747,
+        "languages": {
+          "en": 5574
+        }
+      },
+      "ruSpamModels": {
+        "status": "loaded",
+        "rows": 25000,
+        "ham": 15000,
+        "spam": 10000,
+        "languages": {
+          "ru": 24775,
+          "kk": 225
+        }
+      },
+      "telegram_spam_ru": {
+        "status": "skipped",
+        "rows": 0,
+        "ham": 0,
+        "spam": 0,
+        "languages": {},
+        "reason": "file missing or empty after filtering"
+      },
+      "kazspam_v1": {
+        "status": "loaded",
+        "rows": 474,
+        "ham": 0,
+        "spam": 474,
+        "languages": {
+          "kk": 474
+        }
+      },
+      "issai": {
+        "status": "skipped",
+        "rows": 0,
+        "ham": 0,
+        "spam": 0,
+        "languages": {},
+        "reason": "file missing or empty after filtering"
+      },
+      "kz_transformers": {
+        "status": "loaded",
+        "rows": 963,
+        "ham": 963,
+        "spam": 0,
+        "languages": {
+          "kk": 963
+        }
+      }
+    },
+    "skipped_sources": {
+      "telegram_spam_ru": "file missing or empty after filtering",
+      "issai": "file missing or empty after filtering"
+    },
+    "total_rows": 32011,
+    "total_ham": 20790,
+    "total_spam": 11221,
+    "kz_spam_count": 642,
+    "kz_ham_cap": 963,
+    "kz_ham_added": 963
+  },
+  "clean_class_counts": {
+    "ham": 20462,
+    "spam": 8274,
+    "ham_pct": 71.21,
+    "spam_pct": 28.79,
+    "imbalance_ratio": 2.47
+  },
+  "splits_summary": {
+    "train_indices": {
+      "total": 20115,
+      "ham": 14323,
+      "spam": 5792,
+      "spam_pct": 28.79
+    },
+    "val_indices": {
+      "total": 4310,
+      "ham": 3069,
+      "spam": 1241,
+      "spam_pct": 28.79
+    },
+    "test_indices": {
+      "total": 4311,
+      "ham": 3070,
+      "spam": 1241,
+      "spam_pct": 28.79
+    }
+  }
+}
