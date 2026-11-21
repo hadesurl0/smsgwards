@@ -79,7 +79,7 @@
             </div>
             <div class="mt-3 small d-flex flex-wrap justify-content-around text-center gap-2">
                 {% for lang_code, lang_cnt in summary.by_language.items %}
-                    <span class="badge bg-light text-dark border">{{ lang_code }}: {{ lang_cnt }}</span>
+                    <span class="badge bg-dark text-light border border-secondary">{{ lang_code }}: {{ lang_cnt }}</span>
                 {% empty %}
                     <span class="text-muted">Нет данных по языкам.</span>
                 {% endfor %}
@@ -107,7 +107,9 @@
                         (data.by_risk_level && data.by_risk_level.MEDIUM) || 0,
                         (data.by_risk_level && data.by_risk_level.HIGH) || 0
                     ],
-                    backgroundColor: ["#16a34a", "#d97706", "#dc2626"]
+                    backgroundColor: ["#22c55e", "#f59e0b", "#ef4444"],
+                    borderColor: "#0f172a",
+                    borderWidth: 2
                 }]
             },
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } } }
@@ -122,7 +124,9 @@
                 labels: ["SMS-сообщения", "Отдельные URL"],
                 datasets: [{
                     data: [data.total_sms || 0, data.total_url || 0],
-                    backgroundColor: ["#0d9488", "#0f766e"]
+                    backgroundColor: ["#2dd4bf", "#22d3ee"],
+                    borderColor: "#0f172a",
+                    borderWidth: 2
                 }]
             },
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } } }
@@ -164,7 +168,9 @@
                 labels: langLabels,
                 datasets: [{
                     data: langValues,
-                    backgroundColor: ["#0d9488", "#10b981", "#f59e0b", "#64748b"]
+                    backgroundColor: ["#2dd4bf", "#22d3ee", "#fbbf24", "#94a3b8"],
+                    borderColor: "#0f172a",
+                    borderWidth: 2
                 }]
             },
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } } }

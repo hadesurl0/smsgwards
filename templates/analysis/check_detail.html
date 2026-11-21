@@ -65,10 +65,10 @@
     <!-- Метрики и вероятности моделей -->
     <div class="row g-3 mb-4">
         <div class="col-12 col-md-4">
-            <div class="p-3 border rounded bg-light h-100">
+            <div class="p-3 sg-surface-box h-100">
                 <div class="d-flex justify-content-between mb-2">
                     <span class="small text-secondary">Итоговый показатель (Risk Score)</span>
-                    <span class="fw-bold">{{ check.risk_score }} / 100</span>
+                    <span class="fw-bold sg-mono">{{ check.risk_score }} / 100</span>
                 </div>
                 <div class="sg-risk-meter">
                     <div class="sg-risk-meter-fill sg-risk-fill-{{ check.risk_level }}" style="width: {{ check.risk_score }}%;"></div>
@@ -76,17 +76,17 @@
             </div>
         </div>
         <div class="col-6 col-md-4">
-            <div class="p-3 border rounded bg-light h-100">
+            <div class="p-3 sg-surface-box h-100">
                 <div class="small text-secondary">Вероятность мошенничества SMS (P_sms)</div>
-                <div class="fs-5 fw-bold mt-1">
+                <div class="fs-5 fw-bold sg-mono mt-1">
                     {% if check.p_sms != None %}{{ check.p_sms|floatformat:4 }}{% else %}Н/Д (проверка URL){% endif %}
                 </div>
             </div>
         </div>
         <div class="col-6 col-md-4">
-            <div class="p-3 border rounded bg-light h-100">
+            <div class="p-3 sg-surface-box h-100">
                 <div class="small text-secondary">Максимальная вероятность опасности URL (P_url)</div>
-                <div class="fs-5 fw-bold mt-1">
+                <div class="fs-5 fw-bold sg-mono mt-1">
                     {% if check.p_url_max != None %}{{ check.p_url_max|floatformat:4 }}{% else %}Ссылки отсутствуют{% endif %}
                 </div>
             </div>
@@ -107,7 +107,7 @@
                 <span class="url-nonclickable">{{ primary_url_parts.prefix }}<strong class="url-domain-highlight">{{ primary_url_parts.domain }}</strong>{{ primary_url_parts.suffix }}</span>
             </div>
         {% else %}
-            <div class="p-3 bg-light border rounded font-monospace">{{ check.display_text }}</div>
+            <div class="p-3 sg-surface-box font-monospace">{{ check.display_text }}</div>
         {% endif %}
     </div>
 
@@ -189,7 +189,7 @@
                                     {% if row.triggered %}
                                         <span class="sg-badge sg-badge-suspicious">⚠ Сработал</span>
                                     {% else %}
-                                        <span class="badge bg-light text-secondary border">Норма</span>
+                                        <span class="badge bg-dark text-secondary border border-secondary">Норма</span>
                                     {% endif %}
                                 </td>
                             </tr>

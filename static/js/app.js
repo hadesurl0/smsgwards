@@ -271,7 +271,7 @@
                 urlsSectionEl.classList.remove("d-none");
                 urls.forEach(function (uItem) {
                     const card = document.createElement("div");
-                    card.className = "p-3 mb-2 border rounded bg-light d-flex flex-wrap justify-content-between align-items-center gap-2";
+                    card.className = "p-3 mb-2 sg-surface-box d-flex flex-wrap justify-content-between align-items-center gap-2";
 
                     const leftDiv = document.createElement("div");
                     leftDiv.appendChild(createNonClickableUrlNode(uItem.url, uItem.domain));
@@ -345,7 +345,7 @@
                     statusBadge.className = "sg-badge sg-badge-suspicious";
                     statusBadge.textContent = "⚠ Сработал";
                 } else {
-                    statusBadge.className = "badge bg-light text-secondary border";
+                    statusBadge.className = "badge bg-dark text-secondary border border-secondary";
                     statusBadge.textContent = "Норма";
                 }
                 tdStatus.appendChild(statusBadge);

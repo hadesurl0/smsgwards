@@ -28,7 +28,7 @@
             <label for="sms-text-input" class="form-label fw-bold mb-0">
                 Текст входящего SMS-сообщения:
             </label>
-            <span id="sms-char-counter" class="badge bg-light text-secondary border font-monospace">0 / 1000</span>
+            <span id="sms-char-counter" class="badge bg-dark text-secondary border border-secondary font-monospace">0 / 1000</span>
         </div>
 
         <textarea
@@ -120,10 +120,10 @@
     <!-- Шкала Risk Score и вероятности моделей -->
     <div class="row g-3 mb-4">
         <div class="col-12 col-md-6">
-            <div class="p-3 border rounded bg-light h-100">
+            <div class="p-3 sg-surface-box h-100">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="fw-semibold">Показатель риска (Risk Score):</span>
-                    <span id="res-risk-score-val" class="fs-5 fw-bold">{% if check %}{{ check.risk_score }} / 100{% else %}0 / 100{% endif %}</span>
+                    <span id="res-risk-score-val" class="fs-5 fw-bold sg-mono">{% if check %}{{ check.risk_score }} / 100{% else %}0 / 100{% endif %}</span>
                 </div>
                 <div class="sg-risk-meter">
                     <div
@@ -135,17 +135,17 @@
             </div>
         </div>
         <div class="col-6 col-md-3">
-            <div class="p-3 border rounded bg-light h-100">
+            <div class="p-3 sg-surface-box h-100">
                 <div class="small text-secondary">Вероятность SMS-модели (P_sms)</div>
-                <div id="res-p-sms" class="fs-5 fw-bold mt-1">
+                <div id="res-p-sms" class="fs-5 fw-bold sg-mono mt-1">
                     {% if check and check.p_sms != None %}{{ check.p_sms|floatformat:3 }}{% else %}—{% endif %}
                 </div>
             </div>
         </div>
         <div class="col-6 col-md-3">
-            <div class="p-3 border rounded bg-light h-100">
+            <div class="p-3 sg-surface-box h-100">
                 <div class="small text-secondary">Макс. риск ссылки (P_url)</div>
-                <div id="res-p-url" class="fs-5 fw-bold mt-1">
+                <div id="res-p-url" class="fs-5 fw-bold sg-mono mt-1">
                     {% if check and check.p_url_max != None %}{{ check.p_url_max|floatformat:3 }}{% else %}Ссылки не обнаружены{% endif %}
                 </div>
             </div>
@@ -155,7 +155,7 @@
     <!-- Проверенный текст (выводится безопасно как текст, НФТ-5) -->
     <div class="mb-3">
         <div class="small fw-semibold text-secondary mb-1">Проверенный текст сообщения:</div>
-        <div id="res-input-display" class="p-3 bg-light border rounded font-monospace small">{% if check %}{{ check.display_text }}{% endif %}</div>
+        <div id="res-input-display" class="p-3 sg-surface-box font-monospace small">{% if check %}{{ check.display_text }}{% endif %}</div>
     </div>
 
     <!-- Найденные ссылки (некликабельный текст с выделенным доменом, ФТ-3.10) -->
@@ -164,7 +164,7 @@
         <div id="res-urls-list">
             {% if check %}
                 {% for u in check.url_results.all %}
-                <div class="p-3 mb-2 border rounded bg-light d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <div class="p-3 mb-2 sg-surface-box d-flex flex-wrap justify-content-between align-items-center gap-2">
                     <span class="url-nonclickable">{{ u.url }} (домен: <strong class="url-domain-highlight">{{ u.domain }}</strong>)</span>
                     <span class="small fw-semibold">P_url = {{ u.p_url|floatformat:3 }} ({{ u.category }})</span>
                 </div>

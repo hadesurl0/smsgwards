@@ -2,77 +2,121 @@
 {% block title %}Вход в систему — SMSGwards{% endblock %}
 
 {% block auth_content %}
-<div class="sg-auth-container">
-    <div class="sg-auth-card">
-        <div class="text-center mb-4">
-            <div class="mb-2 d-inline-flex align-items-center justify-content-center rounded-circle p-3" style="background:#ccfbf1;">
-                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M12 2L4 5.5V11.5C4 16.8 7.4 21.6 12 23C16.6 21.6 20 16.8 20 11.5V5.5L12 2Z" stroke="#0f766e" stroke-width="2" fill="rgba(13,148,136,0.18)"/>
-                    <path d="M9.2 12.2L11.2 14.2L15.2 10.2" stroke="#0f766e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<div class="sg-auth-split">
+    <!-- Левая витрина проекта -->
+    <div class="sg-auth-showcase">
+        <div>
+            <div class="d-flex align-items-center gap-2 mb-4">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 2L4 5.5V11.5C4 16.8 7.4 21.6 12 23C16.6 21.6 20 16.8 20 11.5V5.5L12 2Z" stroke="#2dd4bf" stroke-width="2" fill="rgba(20,184,166,0.2)"/>
+                    <path d="M9.2 12.2L11.2 14.2L15.2 10.2" stroke="#22d3ee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
+                <span class="fs-4 fw-bold text-white">SMSGwards</span>
+                <span class="sg-brand-badge">SOC v1.0</span>
             </div>
-            <h1 class="h4 fw-bold mb-1">SMSGwards</h1>
-            <p class="text-muted small mb-0">
-                Интеллектуальная система обнаружения мошеннических SMS-сообщений и подозрительных ссылок
+
+            <h1 class="display-6 fw-bold text-white mb-3">
+                Интеллектуальный щит от смишинга и фишинга
+            </h1>
+            <p class="text-secondary fs-6 mb-4" style="max-width: 520px;">
+                Совместный анализ текста SMS, уловок социальной инженерии и структуры интернет-ссылок с объяснением каждого решения.
             </p>
+
+            <div class="row g-3" style="max-width: 560px;">
+                <div class="col-12 col-sm-6">
+                    <div class="sg-feature-chip h-100">
+                        <div class="text-primary fw-bold small mb-1">NLP · RU / KK / EN</div>
+                        <div class="small text-secondary">TF-IDF + правила социальной инженерии (ROC-AUC 0.9961)</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="sg-feature-chip h-100">
+                        <div class="text-primary fw-bold small mb-1">URL · 22 ПРИЗНАКА</div>
+                        <div class="small text-secondary">Офлайн-разбор домена и Punycode без сетевых запросов</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="sg-feature-chip">
+                        <div class="text-primary fw-bold small mb-1">RISK SCORE 0–100 & ПРИВАТНОСТЬ</div>
+                        <div class="small text-secondary">Маскирование карт/телефонов по умолчанию и защита от XSS</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} small py-2">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
+        <div class="pt-4 mt-4 border-top border-secondary border-opacity-25 small text-secondary">
+            Авторы проекта: <strong class="text-light">Мурат Ринат, Мирланов Айдархан</strong> · 2026
+        </div>
+    </div>
 
-        {% if form.non_field_errors %}
-            <div class="alert alert-danger small py-2" role="alert">
-                {% for err in form.non_field_errors %}
-                    <div>{{ err }}</div>
-                {% endfor %}
+    <!-- Правая панель входа -->
+    <div class="sg-auth-form-pane">
+        <div class="sg-auth-card">
+            <div class="mb-4">
+                <span class="sg-brand-badge mb-2 d-inline-block">Авторизация</span>
+                <h2 class="h4 fw-bold text-white mb-1">Вход в SMSGwards</h2>
+                <p class="text-secondary small mb-0">
+                    Введите учётные данные для доступа к консоли анализа
+                </p>
             </div>
-        {% endif %}
 
-        <form method="post" action="{% url 'accounts:login' %}" novalidate>
-            {% csrf_token %}
-            {% if next %}
-                <input type="hidden" name="next" value="{{ next }}">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} small py-2">
+                        {{ message }}
+                    </div>
+                {% endfor %}
             {% endif %}
 
-            <div class="mb-3">
-                <label for="{{ form.username.id_for_label }}" class="form-label fw-semibold">
-                    {{ form.username.label }}
-                </label>
-                {{ form.username }}
-                {% if form.username.errors %}
-                    <div class="text-danger small mt-1">
-                        {% for err in form.username.errors %}{{ err }}{% endfor %}
-                    </div>
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger small py-2" role="alert">
+                    {% for err in form.non_field_errors %}
+                        <div>{{ err }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="post" action="{% url 'accounts:login' %}" novalidate>
+                {% csrf_token %}
+                {% if next %}
+                    <input type="hidden" name="next" value="{{ next }}">
                 {% endif %}
+
+                <div class="mb-3">
+                    <label for="{{ form.username.id_for_label }}" class="form-label fw-semibold small">
+                        {{ form.username.label }}
+                    </label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="text-danger small mt-1">
+                            {% for err in form.username.errors %}{{ err }}{% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label for="{{ form.password.id_for_label }}" class="form-label fw-semibold small">
+                        {{ form.password.label }}
+                    </label>
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                        <div class="text-danger small mt-1">
+                            {% for err in form.password.errors %}{{ err }}{% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
+                    Войти в консоль →
+                </button>
+            </form>
+
+            <div class="text-center mt-4 pt-3 border-top border-secondary border-opacity-25">
+                <span class="text-secondary small">Нет учётной записи?</span>
+                <a href="{% url 'accounts:register' %}" class="small fw-semibold text-primary text-decoration-none ms-1">
+                    Зарегистрироваться
+                </a>
             </div>
-
-            <div class="mb-4">
-                <label for="{{ form.password.id_for_label }}" class="form-label fw-semibold">
-                    {{ form.password.label }}
-                </label>
-                {{ form.password }}
-                {% if form.password.errors %}
-                    <div class="text-danger small mt-1">
-                        {% for err in form.password.errors %}{{ err }}{% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
-                Войти
-            </button>
-        </form>
-
-        <div class="text-center mt-3 pt-3 border-top">
-            <span class="text-muted small">Нет учётной записи?</span>
-            <a href="{% url 'accounts:register' %}" class="small fw-semibold text-decoration-none ms-1">
-                Зарегистрироваться
-            </a>
         </div>
     </div>
 </div>

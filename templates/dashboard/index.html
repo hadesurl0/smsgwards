@@ -27,48 +27,71 @@
     </div>
 </div>
 
-<!-- Карточки-счётчики (Задание 17 п. 1, Раздел 9.2) -->
+<!-- Асимметричная Bento-панель показателей (Cyber-SOC) -->
 <div class="row g-3 mb-4">
-    <div class="col-6 col-md-4 col-xl-2">
-        <div class="sg-stat-card">
-            <div class="sg-stat-label">Всего SMS</div>
-            <div class="sg-stat-value text-primary" id="stat-total-sms">{{ summary.total_sms }}</div>
-            <div class="small text-muted mt-1">Всего проверок: {{ summary.total_checks }}</div>
+    <!-- Левая Hero-карточка сводного риска -->
+    <div class="col-12 col-xl-4">
+        <div class="sg-hero-card d-flex flex-column justify-content-between">
+            <div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="sg-brand-badge">Индекс риска</span>
+                    <span class="small text-secondary sg-mono">За {{ selected_days }} дн.</span>
+                </div>
+                <div class="d-flex align-items-baseline gap-2 mt-2">
+                    <span class="display-4 fw-bold text-white sg-mono" id="stat-avg-risk">{{ summary.avg_risk_score }}</span>
+                    <span class="text-secondary fs-5 sg-mono">/ 100</span>
+                </div>
+                <div class="small text-secondary mb-3">Средний Risk Score по выполненным проверкам</div>
+                <div class="sg-risk-meter mb-3">
+                    <div class="sg-risk-meter-fill {% if summary.avg_risk_score >= 70 %}sg-risk-fill-HIGH{% elif summary.avg_risk_score >= 35 %}sg-risk-fill-MEDIUM{% else %}sg-risk-fill-LOW{% endif %}"
+                         style="width: {{ summary.avg_risk_score }}%;"></div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center pt-3 border-top border-secondary border-opacity-25 small">
+                <span class="text-secondary">Всего проверок в системе:</span>
+                <strong class="text-primary sg-mono fs-6">{{ summary.total_checks }}</strong>
+            </div>
         </div>
     </div>
-    <div class="col-6 col-md-4 col-xl-2">
-        <div class="sg-stat-card">
-            <div class="sg-stat-label">Всего URL</div>
-            <div class="sg-stat-value text-info" id="stat-total-url">{{ summary.total_url }}</div>
-            <div class="small text-muted mt-1">Отдельных ссылок</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-4 col-xl-2">
-        <div class="sg-stat-card border-success border-opacity-50">
-            <div class="sg-stat-label">✓ Безопасные</div>
-            <div class="sg-stat-value text-success" id="stat-safe">{{ summary.safe_count }}</div>
-            <div class="small text-muted mt-1">Категория SAFE</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-4 col-xl-2">
-        <div class="sg-stat-card border-warning border-opacity-50">
-            <div class="sg-stat-label">⚠ Подозрительные</div>
-            <div class="sg-stat-value text-warning" id="stat-suspicious">{{ summary.suspicious_count }}</div>
-            <div class="small text-muted mt-1">Категория SUSPICIOUS</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-4 col-xl-2">
-        <div class="sg-stat-card border-danger border-opacity-50">
-            <div class="sg-stat-label">⛔ Мошеннические</div>
-            <div class="sg-stat-value text-danger" id="stat-fraudulent">{{ summary.fraudulent_count }}</div>
-            <div class="small text-muted mt-1">FRAUDULENT / DANGEROUS</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-4 col-xl-2">
-        <div class="sg-stat-card">
-            <div class="sg-stat-label">Средний Risk Score</div>
-            <div class="sg-stat-value" id="stat-avg-risk">{{ summary.avg_risk_score }}</div>
-            <div class="small text-muted mt-1">Шкала от 0 до 100</div>
+
+    <!-- Правая сетка Bento 2x2 + сводка угроз -->
+    <div class="col-12 col-xl-8">
+        <div class="row g-3 h-100">
+            <div class="col-6 col-md-4">
+                <div class="sg-stat-card">
+                    <div class="sg-stat-label">💬 Всего SMS</div>
+                    <div class="sg-stat-value text-primary mt-2" id="stat-total-sms">{{ summary.total_sms }}</div>
+                    <div class="small text-muted mt-1">Текстовый анализ</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="sg-stat-card" style="border-left-color: #22d3ee;">
+                    <div class="sg-stat-label">🔗 Всего URL</div>
+                    <div class="sg-stat-value text-info mt-2" id="stat-total-url">{{ summary.total_url }}</div>
+                    <div class="small text-muted mt-1">Отдельных ссылок</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="sg-stat-card" style="border-left-color: #4ade80;">
+                    <div class="sg-stat-label">✓ Безопасные</div>
+                    <div class="sg-stat-value text-success mt-2" id="stat-safe">{{ summary.safe_count }}</div>
+                    <div class="small text-muted mt-1">Категория SAFE</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="sg-stat-card" style="border-left-color: #fbbf24;">
+                    <div class="sg-stat-label">⚠ Подозрительные</div>
+                    <div class="sg-stat-value text-warning mt-2" id="stat-suspicious">{{ summary.suspicious_count }}</div>
+                    <div class="small text-muted mt-1">Категория SUSPICIOUS · Требуют внимания</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="sg-stat-card" style="border-left-color: #f87171;">
+                    <div class="sg-stat-label">⛔ Мошеннические / Опасные</div>
+                    <div class="sg-stat-value text-danger mt-2" id="stat-fraudulent">{{ summary.fraudulent_count }}</div>
+                    <div class="small text-muted mt-1">FRAUDULENT / DANGEROUS</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -178,9 +201,9 @@
     <div class="row g-3">
         {% for m in summary.active_models %}
         <div class="col-12 col-md-6">
-            <div class="p-3 border rounded bg-light h-100">
+            <div class="p-3 sg-surface-box h-100">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <span class="fw-bold">{{ m.model_type_display }} (v{{ m.version }})</span>
+                    <span class="fw-bold text-white">{{ m.model_type_display }} (v{{ m.version }})</span>
                     <span class="badge bg-success">Активна</span>
                 </div>
                 <div class="small text-secondary mb-2">
@@ -190,7 +213,7 @@
                 {% if m.metrics %}
                 <div class="d-flex flex-wrap gap-2 small">
                     {% for k, v in m.metrics.items %}
-                        <span class="badge bg-white text-dark border">{{ k }}: {{ v }}</span>
+                        <span class="badge bg-dark text-light border border-secondary">{{ k }}: {{ v }}</span>
                     {% endfor %}
                 </div>
                 {% endif %}
@@ -224,8 +247,9 @@
                         summaryData.suspicious_count || 0,
                         summaryData.fraudulent_count || 0
                     ],
-                    backgroundColor: ["#16a34a", "#d97706", "#dc2626"],
-                    borderWidth: 1
+                    backgroundColor: ["#22c55e", "#f59e0b", "#ef4444"],
+                    borderColor: "#0f172a",
+                    borderWidth: 2
                 }]
             },
             options: {
@@ -299,7 +323,7 @@
                 datasets: [{
                     label: "Число срабатываний",
                     data: topFeats.length ? topFeats.map(f => f.count) : [0],
-                    backgroundColor: "#0d9488",
+                    backgroundColor: "#2dd4bf",
                     borderRadius: 6
                 }]
             },
